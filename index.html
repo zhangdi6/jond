@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Jond 的个人网站，展示个人信息、介绍短片、开发项目与简历。"
+    />
+    <title>Jond | 个人网站</title>
+    <link rel="preload" href="./assets/hero-visual.svg" as="image" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="回到首页">
+        <span class="brand-mark" aria-hidden="true">J</span>
+        <span>Jond</span>
+      </a>
+      <button
+        class="nav-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="site-nav"
+        aria-label="打开导航"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav class="site-nav" id="site-nav" aria-label="主导航">
+        <a href="#profile">个人信息</a>
+        <a href="#video">介绍短片</a>
+        <a href="#projects">项目</a>
+        <a href="#resume">简历</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero" aria-labelledby="hero-title">
+        <img class="hero-visual" src="./assets/hero-visual.svg" alt="" />
+        <div class="hero-shade" aria-hidden="true"></div>
+        <div class="hero-content">
+          <p class="eyebrow">Independent Developer</p>
+          <h1 id="hero-title">Jond</h1>
+          <p class="hero-lede">
+            我专注于把产品想法做成稳定、清爽、可持续迭代的移动应用与 Web 体验。
+          </p>
+          <div class="hero-actions" aria-label="主要操作">
+            <a class="button primary" href="#projects">查看项目</a>
+            <a class="button secondary" href="./resume.html">查看简历</a>
+          </div>
+        </div>
+        <a class="scroll-cue" href="#profile" aria-label="跳到个人信息">
+          <span>个人信息</span>
+        </a>
+      </section>
+
+      <section class="section profile-section" id="profile" aria-labelledby="profile-title">
+        <div class="section-head">
+          <p class="eyebrow">Profile</p>
+          <h2 id="profile-title">个人信息</h2>
+          <p>
+            这里可以放你的定位、联系方式、所在城市，以及你希望别人第一眼记住的能力标签。
+          </p>
+        </div>
+
+        <div class="profile-grid">
+          <div class="profile-copy">
+            <h3>产品型开发者，重视体验、交付与长期维护</h3>
+            <p>
+              我熟悉从需求梳理、原型设计、前端实现到应用发布的完整流程。习惯用简洁的界面表达复杂信息，也乐于把技术细节打磨到用户感受不到它的存在。
+            </p>
+            <dl class="info-list">
+              <div>
+                <dt>姓名</dt>
+                <dd>Jond</dd>
+              </div>
+              <div>
+                <dt>方向</dt>
+                <dd>移动应用 / Web 产品开发</dd>
+              </div>
+              <div>
+                <dt>城市</dt>
+                <dd>上海，可远程协作</dd>
+              </div>
+              <div>
+                <dt>邮箱</dt>
+                <dd><a href="mailto:hello@example.com">hello@example.com</a></dd>
+              </div>
+            </dl>
+          </div>
+
+          <div class="metric-strip" aria-label="个人亮点">
+            <div>
+              <strong>6+</strong>
+              <span>上线项目</span>
+            </div>
+            <div>
+              <strong>3</strong>
+              <span>平台经验</span>
+            </div>
+            <div>
+              <strong>48h</strong>
+              <span>原型响应</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section video-section" id="video" aria-labelledby="video-title">
+        <div class="section-head">
+          <p class="eyebrow">Intro Video</p>
+          <h2 id="video-title">我的个人介绍短视频</h2>
+          <p>
+            用一段短片快速建立信任感，讲清楚你是谁、擅长什么、正在寻找怎样的合作机会。
+          </p>
+        </div>
+        <div class="video-layout">
+          <div class="video-frame">
+            <video controls playsinline preload="none" poster="./assets/video-poster.svg" aria-label="个人介绍短视频">
+              <!-- 上传真实视频后，取消下一行注释即可启用播放。 -->
+              <!-- <source src="./assets/intro.mp4" type="video/mp4" /> -->
+              你的浏览器不支持视频播放。
+            </video>
+          </div>
+          <div class="video-notes">
+            <h3>短片重点</h3>
+            <ul>
+              <li>30 秒讲清个人背景与技术方向。</li>
+              <li>展示代表项目的真实界面和发布成果。</li>
+              <li>收束到联系方式与合作方式。</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="section projects-section" id="projects" aria-labelledby="projects-title">
+        <div class="section-head">
+          <p class="eyebrow">Selected Work</p>
+          <h2 id="projects-title">我开发过的项目</h2>
+          <p>
+            每个项目都保留介绍、技术标签与应用商店地址，方便访客直接了解成果并跳转体验。
+          </p>
+        </div>
+        <div class="project-grid" id="project-grid"></div>
+      </section>
+
+      <section class="section resume-section" id="resume" aria-labelledby="resume-title">
+        <div class="section-head">
+          <p class="eyebrow">Resume</p>
+          <h2 id="resume-title">我的简历</h2>
+          <p>
+            用时间线展示经历，用能力矩阵补充技术栈，让招聘方或合作方能快速判断匹配度。
+          </p>
+        </div>
+
+        <div class="resume-layout">
+          <div class="timeline" aria-label="经历时间线">
+            <article class="timeline-item">
+              <time datetime="2025">2025 至今</time>
+              <h3>独立开发者</h3>
+              <p>负责移动应用从立项、设计、开发、测试到上架的完整流程。</p>
+            </article>
+            <article class="timeline-item">
+              <time datetime="2022">2022 - 2025</time>
+              <h3>前端 / 移动端工程师</h3>
+              <p>参与商业产品迭代，重点负责交互体验、性能优化与组件体系建设。</p>
+            </article>
+            <article class="timeline-item">
+              <time datetime="2020">2020 - 2022</time>
+              <h3>软件工程学习与项目实践</h3>
+              <p>积累 Web、移动端、服务端基础能力，并完成多款可演示项目。</p>
+            </article>
+          </div>
+
+          <div class="skill-panel">
+            <h3>核心能力</h3>
+            <div class="skill-list" aria-label="技能列表">
+              <span>Swift</span>
+              <span>React</span>
+              <span>TypeScript</span>
+              <span>Node.js</span>
+              <span>UI 设计</span>
+              <span>应用上架</span>
+            </div>
+            <a class="button primary full-width" href="./resume.html">打开完整简历</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>© 2026 Jond. Built with care.</p>
+      <a href="mailto:hello@example.com">hello@example.com</a>
+    </footer>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
