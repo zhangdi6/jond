@@ -16,7 +16,7 @@ const projects = [
     year: "2025",
     subtitle: "轻量简约",
     description:
-      "小清新的倾诉树洞应用,
+      "小清新的倾诉树洞应用",
     tags: ["Flutter"，"Kotlin"],
     stores: [
       { label: "App Store", url: "https://apps.apple.com/app/id1588053931" },
