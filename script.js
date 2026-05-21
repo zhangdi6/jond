@@ -1,38 +1,38 @@
 const projects = [
   {
-    name: "Habit Flow",
+    name: "遇见漂流瓶",
     year: "2026",
-    subtitle: "习惯管理与复盘应用",
+    subtitle: "经典漂流瓶ip产品",
     description:
-      "面向个人成长场景，提供习惯追踪、周复盘、提醒通知与数据趋势分析，重点优化低压力打卡体验。",
-    tags: ["iOS", "Swift", "Health", "CloudKit"],
+      "温暖的相遇，治愈的海洋，沉浸式体验",
+    tags: ["iOS", "Android", "Harmony"],
     stores: [
-      { label: "App Store", url: "https://apps.apple.com/app/id0000000000" },
-      { label: "Google Play", url: "https://play.google.com/store/apps/details?id=com.example.habitflow" },
+      { label: "App Store", url: "https://apps.apple.com/app/id1454093306" },
+      { label: "应用宝", url: "https://a.app.qq.com/o/simple.jsp?pkgname=com.innovation.driftbottle" },
     ],
   },
   {
-    name: "Pocket Ledger",
+    name: "小星空",
     year: "2025",
-    subtitle: "轻量记账工具",
+    subtitle: "轻量简约",
     description:
-      "为自由职业者设计的收支记录工具，支持分类预算、月度报表、票据备注与多设备同步。",
-    tags: ["React", "TypeScript", "PWA", "Charts"],
+      "小清新的倾诉树洞应用,
+    tags: ["Flutter"，"Kotlin"],
     stores: [
-      { label: "App Store", url: "https://apps.apple.com/app/id1111111111" },
-      { label: "Google Play", url: "https://play.google.com/store/apps/details?id=com.example.ledger" },
+      { label: "App Store", url: "https://apps.apple.com/app/id1588053931" },
+      { label: "应用宝", url: "https://a.app.qq.com/o/simple.jsp?pkgname=com.qiyuan.sky" },
     ],
   },
   {
-    name: "Focus Desk",
+    name: "岸号",
     year: "2024",
-    subtitle: "专注计时与任务工作台",
+    subtitle: "年轻人的潮流兴趣社交阵地",
     description:
-      "将番茄钟、任务分组、白噪音与桌面小组件整合到一个安静的工作流里，适合高频使用。",
-    tags: ["macOS", "SwiftUI", "Widgets", "Productivity"],
+      "一款线下社交应用，让社交回到现实，让关系自然发生。 潮向，由你而定。",
+    tags: ["iOS", "Android", "Web"],
     stores: [
-      { label: "Mac App Store", url: "https://apps.apple.com/app/id2222222222" },
-      { label: "产品主页", url: "https://example.com/focus-desk" },
+      { label: "Mac App Store", url: "https://apps.apple.com/app/id6483942038" },
+      { label: "应用宝", url: "https://a.app.qq.com/o/simple.jsp?pkgname=ad.anhao.uni" },
     ],
   },
 ];
