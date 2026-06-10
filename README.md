@@ -1,41 +1,37 @@
-# Jond 个人网站
+# 张迪 Jond 个人网站
 
-这是一个无需安装依赖的静态个人网站项目，包含：
+这是一个基于 Vite + React 的个人网站，首页首屏使用 `@shadergradient/react` 渲染动态 WebGL 背景。
 
-- 个人信息
-- 个人介绍短视频
-- 开发项目与应用商店地址
-- 简历展示与打印导出页面
-
-## 打开方式
-
-直接用浏览器打开 `index.html` 即可预览。
-
-也可以启动本地静态服务：
+## 开发
 
 ```bash
-python3 -m http.server 5173
+npm install
+npm run dev
 ```
 
-然后访问 `http://localhost:5173`。
+访问 `http://127.0.0.1:5173`。
 
-## 替换内容
+## 构建
 
-- 修改 `index.html` 中的姓名、简介、邮箱、城市、经历和技能。
-- 修改 `script.js` 中的 `projects` 数组，替换项目介绍、技术标签和应用商店地址。
-- 将个人介绍视频放到 `assets/intro.mp4`，然后在 `index.html` 的视频区域取消 `<source src="./assets/intro.mp4" type="video/mp4" />` 这一行的注释。
-- 修改 `resume.html` 中的完整简历内容，浏览器打开后可打印或导出 PDF。
+```bash
+npm run build
+```
 
-## 文件结构
+构建产物会输出到 `dist/`。
 
-```text
-.
-├── assets/
-│   ├── hero-visual.svg
-│   └── video-poster.svg
-├── index.html
-├── resume.html
-├── script.js
-├── styles.css
-└── README.md
+## 内容位置
+
+- 首页结构：`src/App.jsx`
+- 项目数据：`src/data/projects.js`
+- Shader 背景：`src/components/ShaderHero.jsx`
+- 样式：`src/styles.css`
+- 简历页：`public/resume.html`
+- 视频封面：`public/video-poster.svg`
+
+## 视频
+
+把个人介绍视频放到 `public/intro.mp4` 后，可以在 `src/App.jsx` 的 `<video>` 内加入：
+
+```html
+<source src="/intro.mp4" type="video/mp4" />
 ```
