@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>张迪 Jond | 简历</title>
+    <style>
+      :root {
+        --ink: #101820;
+        --ink-soft: #34444c;
+        --paper: #fbf7ef;
+        --line: rgba(16, 24, 32, 0.14);
+        --white: #ffffff;
+        --coral: #ff5f4a;
+        --teal: #117a7a;
+        --gold: #f0b63e;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        color: var(--ink);
+        background: var(--paper);
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          sans-serif;
+        line-height: 1.6;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .topbar {
+        position: sticky;
+        top: 0;
+        z-index: 2;
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 18px 28px;
+        color: rgba(255, 255, 255, 0.78);
+        background: rgba(16, 24, 32, 0.92);
+        backdrop-filter: blur(18px);
+      }
+
+      .topbar strong {
+        color: var(--white);
+      }
+
+      .actions {
+        display: flex;
+        gap: 10px;
+      }
+
+      .button {
+        display: inline-flex;
+        min-height: 38px;
+        align-items: center;
+        justify-content: center;
+        padding: 8px 12px;
+        color: var(--white);
+        border: 1px solid rgba(255, 255, 255, 0.22);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.08);
+        font-weight: 800;
+        cursor: pointer;
+      }
+
+      .button.primary {
+        border-color: transparent;
+        background: var(--coral);
+      }
+
+      .resume-sheet {
+        width: min(900px, calc(100% - 40px));
+        margin: 44px auto 64px;
+        padding: 48px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--white);
+        box-shadow: 0 24px 70px rgba(16, 24, 32, 0.16);
+      }
+
+      .resume-sheet header {
+        display: flex;
+        justify-content: space-between;
+        gap: 24px;
+        padding-bottom: 24px;
+        border-bottom: 2px solid var(--ink);
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        margin-top: 0;
+      }
+
+      h1 {
+        margin-bottom: 8px;
+        font-size: 44px;
+        line-height: 1;
+      }
+
+      h2 {
+        margin-bottom: 14px;
+        color: var(--teal);
+        font-size: 18px;
+        text-transform: uppercase;
+      }
+
+      section {
+        padding: 26px 0 0;
+      }
+
+      .resume-contact {
+        display: grid;
+        gap: 6px;
+        color: var(--ink-soft);
+        text-align: right;
+      }
+
+      .resume-entry {
+        padding: 16px 0;
+        border-top: 1px solid var(--line);
+      }
+
+      .resume-entry:first-of-type {
+        border-top: 0;
+      }
+
+      .resume-entry h3 {
+        margin-bottom: 6px;
+      }
+
+      @media (max-width: 640px) {
+        .topbar,
+        .resume-sheet header {
+          flex-direction: column;
+        }
+
+        .resume-contact {
+          text-align: left;
+        }
+
+        .resume-sheet {
+          padding: 28px 22px;
+        }
+      }
+
+      @media print {
+        .topbar {
+          display: none;
+        }
+
+        body {
+          background: var(--white);
+        }
+
+        .resume-sheet {
+          width: 100%;
+          margin: 0;
+          padding: 0;
+          border: 0;
+          box-shadow: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="topbar">
+      <strong>张迪 Jond</strong>
+      <div class="actions">
+        <a class="button" href="/">返回网站</a>
+        <button class="button primary" type="button" onclick="window.print()">打印 / 导出 PDF</button>
+      </div>
+    </div>
+
+    <article class="resume-sheet" aria-label="完整简历">
+      <header>
+        <div>
+          <h1>张迪 Jond</h1>
+          <p>移动应用 / Web 产品开发者</p>
+        </div>
+        <div class="resume-contact">
+          <span>北京，可远程协作</span>
+          <a href="mailto:2574117580@qq.com">2574117580@qq.com</a>
+          <span>17630360083</span>
+        </div>
+      </header>
+
+      <section>
+        <h2>个人简介</h2>
+        <p>
+          产品型开发者，熟悉需求梳理、原型设计、前端实现、移动端开发和应用发布流程。关注社交产品体验，也擅长将 AI 工具融入研发工作流。
+        </p>
+      </section>
+
+      <section>
+        <h2>工作经历</h2>
+        <div class="resume-entry">
+          <h3>独立开发者，2025 至今</h3>
+          <p>负责移动应用从立项、设计、开发、测试到上架的完整流程。</p>
+        </div>
+        <div class="resume-entry">
+          <h3>前端 / 移动端工程师，2022 - 2025</h3>
+          <p>参与商业产品迭代，重点负责交互体验、性能优化与组件体系建设。</p>
+        </div>
+      </section>
+
+      <section>
+        <h2>代表项目</h2>
+        <div class="resume-entry">
+          <h3>遇见漂流瓶</h3>
+          <p>经典漂流瓶 IP 产品，覆盖 iOS、Android、Harmony 生态。</p>
+        </div>
+        <div class="resume-entry">
+          <h3>小星空</h3>
+          <p>轻量简约树洞应用，用 Flutter 与 Kotlin 构建移动端体验。</p>
+        </div>
+        <div class="resume-entry">
+          <h3>岸号</h3>
+          <p>年轻人的潮流兴趣社交阵地，强调线下社交和真实关系发生。</p>
+        </div>
+      </section>
+
+      <section>
+        <h2>技能</h2>
+        <p>Java、Kotlin、Flutter、Web、Swift、AI 工具、即时通讯、RTC、直播接入、应用商店上架。</p>
+      </section>
+    </article>
+  </body>
+</html>

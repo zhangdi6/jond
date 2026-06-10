@@ -1,0 +1,24 @@
+{
+  "name": "jond-personal-site",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "vite build",
+    "preview": "vite preview --host 127.0.0.1"
+  },
+  "dependencies": {
+    "@react-three/fiber": "^8.17.10",
+    "@shadergradient/react": "^2.4.20",
+    "camera-controls": "^2.8.5",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "three": "^0.164.1",
+    "three-stdlib": "^2.36.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
+    "vite": "^6.4.2"
+  }
+}
