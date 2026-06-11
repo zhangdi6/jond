@@ -91,17 +91,6 @@ function Hero() {
           <p className="hero-lede">
             我把年轻人的社交灵感，设计、开发、发布成真正能上线的移动产品。
           </p>
-          <div className="hero-actions" aria-label="主要操作">
-            <a className="button primary" href="#projects">
-              查看作品
-            </a>
-            <a className="button secondary" href="#video">
-              观看短片
-            </a>
-            <a className="button ghost" href="/resume.html">
-              简历
-            </a>
-          </div>
         </div>
 
         <div className="hero-showcase" aria-label="代表应用预览">
@@ -128,11 +117,6 @@ function Hero() {
         </div>
       </div>
 
-      <div className="hero-meta" aria-label="个人亮点">
-        <span>00 后独立开发者</span>
-        <span>6 款社交产品经验</span>
-        <span>iOS / Android / Web</span>
-      </div>
     </section>
   );
 }
@@ -142,7 +126,6 @@ function Profile() {
     <section className="section profile-section" id="profile" aria-labelledby="profile-title">
       <div className="section-head split-head">
         <h2 id="profile-title">关于我</h2>
-        <p>00 后 / 北京 / ENFJ / 移动应用与 Web 产品开发</p>
       </div>
 
       <div className="profile-board">
@@ -154,25 +137,28 @@ function Profile() {
           </p>
         </article>
 
-        <div className="profile-facts">
+        <div className="profile-facts" aria-label="个人信息标签">
           {[
-            ["姓名", "张迪"],
-            ["城市", "北京，可远程协作"],
-            ["方向", "移动应用 / Web 产品"],
-            ["邮箱", "2574117580@qq.com"],
-            ["电话", "17630360083"],
-            ["状态", "开放合作与机会"],
-          ].map(([label, value]) => (
-            <div className="fact-chip" key={label}>
-              <span>{label}</span>
-              {label === "邮箱" ? (
-                <a href="mailto:2574117580@qq.com">{value}</a>
-              ) : label === "电话" ? (
-                <a href="tel:17630360083">{value}</a>
-              ) : (
-                <strong>{value}</strong>
-              )}
-            </div>
+            { label: "00 后独立开发者" },
+            { label: "6 款社交产品经验" },
+            { label: "iOS / Android / Web" },
+            { label: "张迪" },
+            { label: "北京，可远程协作" },
+            { label: "ENFJ" },
+            { label: "移动应用 / Web 产品" },
+            { label: "2574117580@qq.com", href: "mailto:2574117580@qq.com" },
+            { label: "17630360083", href: "tel:17630360083" },
+            { label: "开放合作与机会" },
+          ].map((item) => (
+            item.href ? (
+              <a className="fact-chip" href={item.href} key={item.label}>
+                {item.label}
+              </a>
+            ) : (
+              <span className="fact-chip" key={item.label}>
+                {item.label}
+              </span>
+            )
           ))}
         </div>
       </div>
