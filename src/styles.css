@@ -39,10 +39,6 @@ body {
   text-rendering: geometricPrecision;
 }
 
-body.nav-open {
-  overflow: hidden;
-}
-
 video,
 img {
   display: block;
@@ -923,6 +919,7 @@ button:focus-visible {
     max-width: none;
     justify-content: space-between;
     padding-right: 58px;
+    overflow: visible;
   }
 
   .brand {
@@ -948,17 +945,30 @@ button:focus-visible {
     top: 82px;
     left: 20px;
     right: 20px;
+    z-index: 29;
     display: none;
     flex-direction: column;
     align-items: stretch;
+    max-height: calc(100dvh - 104px);
+    overflow-y: auto;
     padding: 10px;
     border: 1px solid oklch(1 0 0 / 0.5);
     border-radius: var(--radius);
     background: oklch(0.98 0.012 235 / 0.94);
+    backdrop-filter: blur(18px) saturate(1.08);
   }
 
   body.nav-open .site-nav {
     display: flex;
+  }
+
+  .site-nav a {
+    display: flex;
+    min-height: 48px;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-dark);
+    font-size: 16px;
   }
 
   .hero {
