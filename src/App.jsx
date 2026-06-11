@@ -3,12 +3,34 @@ import { projects } from "./data/projects.js";
 
 const ShaderHero = lazy(() => import("./components/ShaderHero.jsx"));
 
+function shouldUseStaticBackground() {
+  if (typeof window === "undefined" || typeof navigator === "undefined") {
+    return false;
+  }
+
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const smallViewport = window.matchMedia("(max-width: 760px)").matches;
+  const coarsePointer = window.matchMedia("(pointer: coarse)").matches;
+  const android = /Android/i.test(navigator.userAgent);
+  const memory = navigator.deviceMemory ?? Number.POSITIVE_INFINITY;
+  const cores = navigator.hardwareConcurrency ?? Number.POSITIVE_INFINITY;
+  const constrainedDevice = memory <= 4 || cores <= 4;
+
+  return reduceMotion || (android && smallViewport) || (smallViewport && coarsePointer && constrainedDevice);
+}
+
 function GlobalBackground() {
+  const staticBackground = shouldUseStaticBackground();
+
   return (
-    <div className="global-backdrop" aria-hidden="true">
-      <Suspense fallback={<div className="shader-fallback" aria-hidden="true" />}>
-        <ShaderHero />
-      </Suspense>
+    <div className={`global-backdrop${staticBackground ? " is-static" : ""}`} aria-hidden="true">
+      {staticBackground ? (
+        <div className="shader-fallback" aria-hidden="true" />
+      ) : (
+        <Suspense fallback={<div className="shader-fallback" aria-hidden="true" />}>
+          <ShaderHero />
+        </Suspense>
+      )}
       <div className="global-shade" />
     </div>
   );
@@ -24,33 +46,35 @@ function Header() {
   };
 
   return (
-    <header className="site-header">
-      <a className="brand" href="#top" aria-label="回到首页" onClick={closeNav}>
-        <span className="brand-mark" aria-hidden="true">
-          J
-        </span>
-        <span>Jond</span>
-      </a>
+    <>
+      <header className="site-header">
+        <a className="brand" href="#top" aria-label="回到首页" onClick={closeNav}>
+          <span className="brand-mark" aria-hidden="true">
+            J
+          </span>
+          <span>Jond</span>
+        </a>
+        <nav className="site-nav" aria-label="主导航">
+          <a href="#profile" onClick={closeNav}>
+            关于
+          </a>
+          <a href="#video" onClick={closeNav}>
+            短片
+          </a>
+          <a href="#projects" onClick={closeNav}>
+            项目
+          </a>
+          <a href="#resume" onClick={closeNav}>
+            简历
+          </a>
+        </nav>
+      </header>
       <button className="nav-toggle" type="button" aria-label="打开导航" onClick={toggleNav}>
         <span />
         <span />
         <span />
       </button>
-      <nav className="site-nav" aria-label="主导航">
-        <a href="#profile" onClick={closeNav}>
-          关于
-        </a>
-        <a href="#video" onClick={closeNav}>
-          短片
-        </a>
-        <a href="#projects" onClick={closeNav}>
-          项目
-        </a>
-        <a href="#resume" onClick={closeNav}>
-          简历
-        </a>
-      </nav>
-    </header>
+    </>
   );
 }
 

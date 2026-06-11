@@ -42,12 +42,24 @@ const gradientProps = {
   wireframe: false,
 };
 
-export default function ShaderHero() {
-  const reduceMotion =
-    typeof window !== "undefined" &&
-    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+function shouldUseStaticBackground() {
+  if (typeof window === "undefined" || typeof navigator === "undefined") {
+    return false;
+  }
 
-  if (reduceMotion) {
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const smallViewport = window.matchMedia("(max-width: 760px)").matches;
+  const coarsePointer = window.matchMedia("(pointer: coarse)").matches;
+  const android = /Android/i.test(navigator.userAgent);
+  const memory = navigator.deviceMemory ?? Number.POSITIVE_INFINITY;
+  const cores = navigator.hardwareConcurrency ?? Number.POSITIVE_INFINITY;
+  const constrainedDevice = memory <= 4 || cores <= 4;
+
+  return reduceMotion || (android && smallViewport) || (smallViewport && coarsePointer && constrainedDevice);
+}
+
+export default function ShaderHero() {
+  if (shouldUseStaticBackground()) {
     return <div className="shader-fallback" aria-hidden="true" />;
   }
 
