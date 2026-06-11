@@ -1,7 +1,32 @@
-import { lazy, Suspense, useEffect } from "react";
+import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import { projects } from "./data/projects.js";
 
 const ShaderHero = lazy(() => import("./components/ShaderHero.jsx"));
+
+const appIconItems = [
+  { name: "遇见漂流瓶", icon: "/app-icons/遇见漂流瓶icon.png" },
+  { name: "小星空", icon: "/app-icons/小星空logo.png" },
+  { name: "岸号", icon: "/app-icons/岸号logo.png" },
+  { name: "一起饭", icon: "/app-icons/一起饭icon.png" },
+  { name: "伊商汇", icon: "/app-icons/伊商汇icon.png" },
+  { name: "伊甸城", icon: "/app-icons/伊甸城icon.png" },
+  { name: "喜欢的人", icon: "/app-icons/喜欢的人icon.png" },
+  { name: "大鱼优品", icon: "/app-icons/大鱼优品icon.png" },
+  { name: "央信真品", icon: "/app-icons/央信真品icon.png" },
+  { name: "酸啵", icon: "/app-icons/酸啵icon.png" },
+  { name: "PrPr", icon: "/app-icons/PrPr.png" },
+];
+
+const ORBIT_SPIN_MS = 34000;
+const ORBIT_FOCUS_MS = 520;
+
+function normalizeOrbitDelta(degrees) {
+  return ((((degrees + 180) % 360) + 360) % 360) - 180;
+}
+
+function easeOutQuint(progress) {
+  return 1 - Math.pow(1 - progress, 5);
+}
 
 function shouldUseStaticBackground() {
   if (typeof window === "undefined" || typeof navigator === "undefined") {
@@ -190,6 +215,156 @@ function VideoSection() {
   );
 }
 
+function AppIconOrbit() {
+  const stageRef = useRef(null);
+  const rotationRef = useRef(0);
+  const lastFrameRef = useRef(null);
+  const focusAnimationRef = useRef(null);
+  const pausedRef = useRef(false);
+  const reduceMotionRef = useRef(false);
+  const [hoveredIndex, setHoveredIndex] = useState(null);
+  const [focusedIndex, setFocusedIndex] = useState(null);
+
+  const setOrbitRotation = (rotation) => {
+    rotationRef.current = rotation;
+
+    if (!stageRef.current) return;
+    stageRef.current.style.setProperty("--orbit-rotation", `${rotation}deg`);
+    stageRef.current.style.setProperty("--orbit-counter-rotation", `${-rotation}deg`);
+  };
+
+  useEffect(() => {
+    pausedRef.current = hoveredIndex !== null;
+  }, [hoveredIndex]);
+
+  useEffect(() => {
+    const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const updateMotionPreference = () => {
+      reduceMotionRef.current = motionQuery.matches;
+    };
+    let frameId;
+
+    updateMotionPreference();
+    if (motionQuery.addEventListener) {
+      motionQuery.addEventListener("change", updateMotionPreference);
+    } else {
+      motionQuery.addListener(updateMotionPreference);
+    }
+
+    const tick = (now) => {
+      const focusAnimation = focusAnimationRef.current;
+
+      if (focusAnimation) {
+        const progress = Math.min(1, (now - focusAnimation.startedAt) / ORBIT_FOCUS_MS);
+        setOrbitRotation(focusAnimation.start + focusAnimation.delta * easeOutQuint(progress));
+
+        if (progress >= 1) {
+          focusAnimationRef.current = null;
+        }
+      } else if (!pausedRef.current && !reduceMotionRef.current) {
+        const elapsed = lastFrameRef.current ? now - lastFrameRef.current : 0;
+        setOrbitRotation(rotationRef.current - (elapsed / ORBIT_SPIN_MS) * 360);
+      }
+
+      lastFrameRef.current = now;
+      frameId = window.requestAnimationFrame(tick);
+    };
+
+    frameId = window.requestAnimationFrame(tick);
+
+    return () => {
+      window.cancelAnimationFrame(frameId);
+      if (motionQuery.removeEventListener) {
+        motionQuery.removeEventListener("change", updateMotionPreference);
+      } else {
+        motionQuery.removeListener(updateMotionPreference);
+      }
+    };
+  }, []);
+
+  const focusItem = (index) => {
+    const itemAngle = (index * 360) / appIconItems.length;
+    const rotationDelta = normalizeOrbitDelta(-(itemAngle + rotationRef.current));
+
+    setFocusedIndex(index);
+
+    if (reduceMotionRef.current) {
+      focusAnimationRef.current = null;
+      setOrbitRotation(rotationRef.current + rotationDelta);
+      return;
+    }
+
+    focusAnimationRef.current = {
+      start: rotationRef.current,
+      delta: rotationDelta,
+      startedAt: performance.now(),
+    };
+  };
+
+  const releaseFocusFromEmptySpace = (event) => {
+    if (!event.target.closest(".app-orbit-item")) {
+      setFocusedIndex(null);
+    }
+  };
+
+  const activateHover = (index) => {
+    setHoveredIndex(index);
+    setFocusedIndex((current) => (current !== null && current !== index ? null : current));
+  };
+
+  const releaseHover = (index) => {
+    setHoveredIndex((current) => (current === index ? null : current));
+    setFocusedIndex((current) => (current === index ? null : current));
+  };
+
+  return (
+    <div className="app-orbit-showcase" aria-labelledby="app-orbit-title">
+      <div className="app-orbit-head">
+        <h3 id="app-orbit-title">全部产品</h3>
+      </div>
+      <div
+        className={`app-orbit-stage${focusedIndex !== null ? " is-focus-locked" : ""}`}
+        style={{ "--item-count": appIconItems.length }}
+        aria-label="已开发应用图标轮播"
+        ref={stageRef}
+        onPointerDown={releaseFocusFromEmptySpace}
+        onKeyDown={(event) => {
+          if (event.key === "Escape") {
+            setFocusedIndex(null);
+          }
+        }}
+      >
+        <div className="app-orbit-ring">
+          {appIconItems.map((app, index) => (
+            <button
+              className={`app-orbit-item${hoveredIndex === index ? " is-hovered" : ""}${focusedIndex === index ? " is-active" : ""}`}
+              style={{
+                "--angle": `${(index * 360) / appIconItems.length}deg`,
+                "--counter-angle": `${(-index * 360) / appIconItems.length}deg`,
+                "--float-delay": `${index * -0.35}s`,
+              }}
+              aria-label={app.name}
+              aria-pressed={focusedIndex === index}
+              type="button"
+              onPointerEnter={() => activateHover(index)}
+              onPointerLeave={() => releaseHover(index)}
+              onFocus={() => activateHover(index)}
+              onBlur={() => releaseHover(index)}
+              onClick={() => focusItem(index)}
+              key={app.name}
+            >
+              <div className="app-orbit-card">
+                <img src={app.icon} alt="" aria-hidden="true" />
+                <strong>{app.name}</strong>
+              </div>
+            </button>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function Projects() {
   return (
     <section className="section projects-section" id="projects" aria-labelledby="projects-title">
@@ -248,6 +423,7 @@ function Projects() {
           </article>
         ))}
       </div>
+      <AppIconOrbit />
     </section>
   );
 }
